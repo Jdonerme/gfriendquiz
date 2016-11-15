@@ -1,0 +1,8 @@
+Requires spotipy and flask
+A webapp that tells you which member of GFriend is your soulmate.
+To run, run the script:
+  python run.py
+  
+ The webapp runs on local host port 5000.
+ The first page is http://localhost:5000/ or http://localhost:5000/index
+ 
