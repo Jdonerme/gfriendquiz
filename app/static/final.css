@@ -1,0 +1,43 @@
+.result {
+	position: center;
+  	top: 20%;
+  	height: 100%;
+}
+
+.result_image {
+	position: absolute;
+	top: 25%;
+	left: 10%;
+	border: black;
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    width:  280px;
+    height:  380px;
+}
+.play_list{
+	position: absolute;
+	top: 3%;
+	left: 65%;
+	height: 380px;
+}
+
+iframe {
+    frameborder: 1;
+    outline-color: red;
+    outline-width: 5px;
+    height: 70%
+    width: 80%;
+}
+
+.again {
+	position: relative;
+	top: 60%;
+	left: 47%;
+}
+
+.details {
+	position: relative;
+	top: 30%;
+	font-size: 24;
+}
