@@ -23,7 +23,12 @@ class GFriend:
     sinBBio = "SinB"
     UmjiBio = "You're as cute as a button"
 
-    bios = [sowonBio, yerinBio, eunhaBio, yujuBio, sinBBio, UmjiBio]
+    bios = {'Sowon': sowonBio,
+            'Yerin': yerinBio, 
+            'Eunha': eunhaBio, 
+            'Yuju': yujuBio,
+            'SinB': sinBBio, 
+            'Umji': UmjiBio}
     uri = 'spotify:artist:0qlWcS66ohOIi0M8JZwPft'
 class Constants:
     OFFBYONE = 1.0 / 3
@@ -77,13 +82,13 @@ def QuestionUno():
 
             rankingKey = [GFriend.SOWON, GFriend.UMJI, GFriend.YERIN, GFriend.SINB, GFriend.EUNHA, GFriend.YUJU]
             givePoints(rankingKey, results, i)
+            session['results'] = results
             return redirect('/two')
         except(ValueError):
             render_template('Question.html', 
                                question= question,
                                form=form)
         return redirect('one')
-    session['results'] = results
         
     return render_template('Question.html', 
                            question = question, img = 'one.jpg',
@@ -95,17 +100,18 @@ def QuestionDos():
     question = 'How well can you dance?'
     form.response.choices = [(0,"I can't even walk straight"), (1,'What is this "dance?"'), (2,'ehhhhhh'), (3,'kind of'), (4,'like a mo fo'), (5,'I invented dancing')]
     results = session['results']
+    print results
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
             rankingKey = [GFriend.SOWON, GFriend.EUNHA, GFriend.UMJI, \
                   GFriend.YUJU, GFriend.YERIN, GFriend.SINB]
             givePoints(rankingKey, results, i)
-            
+            session['results'] = results
             return redirect('/three')       
         except(ValueError):
             return redirect('/two')  
-    session['results'] = results
+  
     return render_template('Question.html', 
                            question= question, img = 'two.jpg',
                            form=form)
@@ -127,9 +133,10 @@ def QuestionTres():
             render_template('Question.html', 
                             question= question, one = True,
                             form=form)  
+            session['results'] = results
             return redirect('/three')
 
-    session['results'] = results
+    
     return render_template('Question.html', 
                            question= question, img = 'three.jpg',
                            form=form)
@@ -145,11 +152,12 @@ def QuestionQuatro():
             rankingKey =  [GFriend.YUJU, GFriend.SOWON, GFriend.SINB, \
                   GFriend.YERIN, GFriend.EUNHA, GFriend.UMJI]
             givePoints(rankingKey, results, i)
+            session['results'] = results
             return redirect('/five')
         except(ValueError):
             return redirect('/four')
 
-    session['results'] = results
+    
     return render_template('Question.html', 
                            question= question, img = 'four.jpg',
                            form=form)
@@ -158,18 +166,18 @@ def QuestionCinco():
     form  = Question()
     question = 'Do you have a 4D personality?'
     form.response.choices = prep(["I watch paint dry for fun", 'Quirky bad', "I'm simpe folk", 'Quirky good', \
-                                "I guest starred on running man and was the funniest", "I'm N dimensional! (n >> 4)"])
+                                "I was on running man", "I'm N dimensional! (n >> 4)"])
     results = session['results']
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
             rankingKey =  [GFriend.EUNHA, GFriend.UMJI, GFriend.SOWON, \
                     GFriend.SINB, GFriend.YUJU, GFriend.YERIN]  
-            givePoints(rankingKey, results, i) 
+            givePoints(rankingKey, results, i)
+            session['results'] = results 
             return redirect('/six')
         except(ValueError):
             return redirect('/five')
-    session['results'] = results
     return render_template('Question.html', 
                            question=question, img = 'five.jpg',
                            form=form)
@@ -185,11 +193,11 @@ def QuestionSix():
             i = int(form.response.data)
             rankingKey =  [GFriend.YERIN, GFriend.UMJI, GFriend.SINB, \
               GFriend.YUJU, GFriend.EUNHA, GFriend.SOWON]
-            givePoints(rankingKey, results, i) 
+            givePoints(rankingKey, results, i)
+            session['results'] = results
             return redirect('/seven')
         except(ValueError):
             return redirect('/six')
-    session['results'] = results
     return render_template('Question.html',  
                            question='Are you mature?', img = 'six.jpg',
                            form=form)
@@ -205,7 +213,8 @@ def QuestionNueva():
             i = int(form.response.data)
             rankingKey =  [GFriend.SOWON, GFriend.YERIN, GFriend.UMJI, \
                   GFriend.YUJU, GFriend.SINB, GFriend.EUNHA]    
-            givePoints(rankingKey, results, i) 
+            givePoints(rankingKey, results, i)
+            session['results'] = results 
             return redirect('/result')
         except(ValueError):
             return redirect('/seven')
@@ -224,9 +233,8 @@ def final():
     for i in range(len(GFriend.gfriend)):
         if(results[i] == point):
             final.append(GFriend.gfriend[i])
-    choice = rand.randint(0, len(final) - 1)
-    match = final[choice]
-    bio = GFriend.bios[choice]
+    match = rand.choice(final)
+    bio = GFriend.bios[match]
 
     gfriend_uri = GFriend.uri
 
@@ -239,6 +247,12 @@ def final():
         uri_str += ','
     print uri_str
     if(form.is_submitted()):
+        session['results'] = [0] * 6
         return redirect('/index')
-    return render_template('final.html', match = match, img = match + ".jpg",
+    if match == "SinB" or match == "Eunha":
+        img = match + ".gif"
+    else:
+        img = match + ".jpg"
+    
+    return render_template('final.html', match = match, img = img,
                        bio = bio, form = form, uris = uri_str)

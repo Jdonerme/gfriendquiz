@@ -1,95 +1,77 @@
 
 .prompt {
     font-family: "Merienda One", sans-serif;
-    color: black;
+    color: white;
     font-size: 50px;
     border: none;
     text-align: center;
 }
 
 .answers {
+    position: absolute;
     font-family: "Merienda One", sans-serif;
-    color: black;
+    color: white;
     font-size: 20px;
     border: none;
-    left: 0%;
-    height: 500px;
+    left: 30%;
+    top: 0%;
+    width: 100%;
+    text-align:left;
     input[type="radio"] {
       margin: 200px;
+      list-style:none
     }
+
 }
 .button {
     position: absolute;
     top: 100%;
     left: 50%;
-    width: 500px;
 }
 .containerQuestion {
     position: absolute;
     top: 45%;
     left: 20%;
-    width: 1000px;
+    width: 450px;
     height: 200px;
     border: white;
     transform: translateX(-50%) translateY(-40%);
 }
 .label1 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top: 0%;
     left: 80%;
-    color: black;
 }
 .label2 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top: 17%;
     left: 80%;
-    color: black;
 }
 
 .label3 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top:34%;
     left: 80%;
-    color: black;
 }
 .label4 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top: 50%;
     left: 80%;
-    color: black;
+    color: white;
 }
 
 .label5 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top: 67%;
     left: 80%;
-    color: black;
+    color: white;
 }
 .label6 {
-    font-family: "Merienda One", sans-serif;
-    font-size: 20px;
     position: absolute;
     top: 84%;
     left: 80%;
-    color: black;
 }
-.overlayBlue {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: cyan;
-    opacity: .9;
-    z-index: -1;
+
+ul{
+    list-style-type:none;
 }

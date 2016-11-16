@@ -1,0 +1,30 @@
+
+.caption {
+	position: absolute;
+	top: 95%;
+	right: 45%;
+    font-family: "Merienda One", sans-serif;
+    font-size: 28px;
+	border: none;
+
+}
+.main_btn {
+  font-color: black;
+  border-radius: 24px;
+}
+
+
+.container {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    border: white;
+    transform: translateX(-50%) translateY(-40%);
+    height: 525px;
+}
+.title {
+    font-family: "Merienda One", sans-serif;
+    color: #ffff66;
+    font-size: 40px;
+    border: none;
+}
