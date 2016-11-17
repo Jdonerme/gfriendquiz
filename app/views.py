@@ -16,12 +16,18 @@ class GFriend:
     UMJI = 5    
     gfriend = ['Sowon', 'Yerin', 'Eunha', 'Yuju', 'SinB', 'Umji']
 
-    sowonBio = "You're a mom."
-    yerinBio = "You're fun."
-    eunhaBio = "You're cute."
-    yujuBio = "Yuju"
-    sinBBio = "SinB"
-    UmjiBio = "You're as cute as a button"
+    sowonBio = "You and Sowon would be a perfect match. You both take care of others " \
+                "around you and would be cute looking after each other."
+    yerinBio = "You and Yerin go toegther like white on rice. You two would get " \
+                "into all kinds of fun shenanigans together."
+    eunhaBio = "You and Eunha make a cute pair. Both of you are adorable and sweet." \
+
+    yujuBio = "Yuu and Yuju are meant to be. Both of you are talented and fun."
+    sinBBio = "You and SinB should be a hot new couple. Both of you just want " \
+                "to have fun, laugh out loud, and dance the night away."
+    UmjiBio = "You and Umji would be great together. Your sweetheart nature is" \
+        " a perfect complement to Umji's cuteness." 
+
 
     bios = {'Sowon': sowonBio,
             'Yerin': yerinBio, 
@@ -249,10 +255,8 @@ def final():
     if(form.is_submitted()):
         session['results'] = [0] * 6
         return redirect('/index')
-    if match == "SinB" or match == "Eunha":
-        img = match + ".gif"
-    else:
-        img = match + ".jpg"
     
+    img = match + ".gif"
+ 
     return render_template('final.html', match = match, img = img,
                        bio = bio, form = form, uris = uri_str)
