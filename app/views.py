@@ -79,7 +79,7 @@ def index():
 @app.route('/one', methods = ['GET', 'POST'])
 def QuestionUno():
     form = Question()
-    form.response.choices =  [(0, "Not at all"), (1, 'no'), (2, 'meh'), (3, 'kind of'), (4, "das me, I'm cute"), (5, 'Hella')]
+    form.response.choices =  [(0, "Not at all"), (1, 'no'), (2, 'meh'), (3, 'kind of'), (4, "I'm p decent"), (5, 'Hella')]
     question = 'How well can you sing?'
     results = [0.0] * 6
     if(form.is_submitted()):
@@ -104,9 +104,9 @@ def QuestionUno():
 def QuestionDos():
     form  = Question()
     question = 'How well can you dance?'
-    form.response.choices = [(0,"I can't even walk straight"), (1,'What is this "dance?"'), (2,'ehhhhhh'), (3,'kind of'), (4,'like a mo fo'), (5,'I invented dancing')]
+    form.response.choices = [(0,"I can't even walk straight"), (1,'What is this "dance?"'), (2,'ehhhhhh'), (3,"I'm ok"), (4,'like a mo fo'), (5,'I invented dancing')]
     results = session['results']
-    print results
+   
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -171,7 +171,7 @@ def QuestionQuatro():
 def QuestionCinco():
     form  = Question()
     question = 'Do you have a 4D personality?'
-    form.response.choices = prep(["I watch paint dry for fun", 'Quirky bad', "I'm simpe folk", 'Quirky good', \
+    form.response.choices = prep(["I watch paint dry for fun", 'Quirky bad', "I'm simple folk", 'Quirky good', \
                                 "I was on running man", "I'm N dimensional! (n >> 4)"])
     results = session['results']
     if(form.is_submitted()):
@@ -213,7 +213,7 @@ def QuestionNueva():
     form  = Question()
     question = 'Does Joe Donermeyer Love you?'
     form.response.choices = prep(["Who is that?", "We don't get along", 'Unclear EOM', "We're good friends", \
-        "We're BFFLs", 'We had a life changing moment together'])
+        "We're BFFLs", 'More than anything'])
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -251,7 +251,7 @@ def final():
     for track in songs['tracks']:
         uri_str += track['uri'][14:]
         uri_str += ','
-    print uri_str
+   
     if(form.is_submitted()):
         session['results'] = [0] * 6
         return redirect('/index')

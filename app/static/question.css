@@ -1,17 +1,21 @@
 
 .prompt {
+    position: absolute;
     font-family: "Merienda One", sans-serif;
-    color: white;
     font-size: 50px;
+    color: white;
     border: none;
     text-align: center;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%)
 }
 
 .answers {
     position: absolute;
     font-family: "Merienda One", sans-serif;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     border: none;
     left: 30%;
     top: 0%;
@@ -27,15 +31,16 @@
     position: absolute;
     top: 100%;
     left: 50%;
+    transform: translateX(-50%);
 }
 .containerQuestion {
     position: absolute;
     top: 45%;
-    left: 20%;
-    width: 450px;
-    height: 200px;
+    left: 17%;
+    width: 52%;
+    height: 30%;
     border: white;
-    transform: translateX(-50%) translateY(-40%);
+    transform: translateX(-50%) translateY(-50%);
 }
 .label1 {
     position: absolute;
@@ -75,3 +80,4 @@
 ul{
     list-style-type:none;
 }
+question
