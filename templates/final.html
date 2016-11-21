@@ -1,0 +1,46 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+  <link rel="stylesheet" href = {{ url_for('static', filename='all_pages.css') }}>
+  <link rel="stylesheet" href = {{ url_for('static', filename='final.css') }}>
+  <form action="" method="post" name="respond">
+      {{ form.hidden_tag() }}
+      <img src={{ url_for('static', filename='final_background.jpg') }} class="bg">
+
+      <div class = overlay></div>
+      <div class = page>
+        <img src={{ url_for('static', filename= img) }} class="result_image"> 
+        <div class = result>
+          <body>
+              <h1 style="text-align:center">You matched with: </h1>
+              <br>
+              <h1 style="text-align:center">{{match}}!</h1>
+              <div class = "details">
+                <p style="text-align:center">{{bio}}</p>
+              </div>
+
+              <div class = "again">
+                <p><input type="submit" value="Take it again!"></p>
+            </div>
+          </body>
+        </div>
+        <div class = "play_list">
+          <h1 style="text-align:center;color:#ffff66;font-size:1.55vw;"> Now listen to Gfriend's music! <h1>
+          <iframe src={{"https://embed.spotify.com/?uri=spotify:trackset:" + uris}} width="400" height="500" frameborder="0" allowtransparency="true"></iframe>
+          </h1>
+          </h1>
+          </div>
+        </div>
+        </form>
+
+
+    
+
+      
+
+
+
+  </form>
+{% endblock %}
