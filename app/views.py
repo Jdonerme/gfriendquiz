@@ -81,7 +81,7 @@ def QuestionUno():
     form = Question()
     form.response.choices =  [(0, "Not at all"), (1, 'no'), (2, 'meh'), (3, 'kind of'), (4, "I'm p decent"), (5, 'Hella')]
     question = 'How well can you sing?'
-    results = [0.0] * 6
+    results = [0] * 6
     if(form.is_submitted()):
         try:
             i = int(form.response.data) 
@@ -105,7 +105,10 @@ def QuestionDos():
     form  = Question()
     question = 'How well can you dance?'
     form.response.choices = [(0,"I can't even walk straight"), (1,'What is this "dance?"'), (2,'ehhhhhh'), (3,"I'm ok"), (4,'like a mo fo'), (5,'I invented dancing')]
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
    
     if(form.is_submitted()):
         try:
@@ -127,7 +130,10 @@ def QuestionTres():
     form  = Question()
     question = 'Are you a visual?'
     form.response.choices = prep(["U - G - L Y, I don't have an alibi", "My mom thinks I'm cute", "I'm ok I guess", '*winks*', "My looks are killer", "I'm a Greek Deity"])
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -151,7 +157,10 @@ def QuestionQuatro():
     form  = Question()
     question = 'Are you a cutie pie?'
     form.response.choices =  prep(["Rachael wouldn't call me cute", "yeah, that's a no", 'maybe a cutie potato', 'i is a qt', "das me, I'm cute", "Cuter than Joon's smile"])
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -173,7 +182,10 @@ def QuestionCinco():
     question = 'Do you have a 4D personality?'
     form.response.choices = prep(["I watch paint dry for fun", 'Quirky bad', "I'm simple folk", 'Quirky good', \
                                 "I was on running man", "I'm N dimensional! (n >> 4)"])
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -193,7 +205,10 @@ def QuestionSix():
     form  = Question()
     form.response.choices = prep(["THAT'S WHAT SHE SAID", 'Hmmm. No no', 'I like to whine a lot', "I'm growing up", "people always think I'm older than I am",\
                                 "I'm the parent in my friend group"])
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
@@ -209,7 +224,10 @@ def QuestionSix():
                            form=form)
 @app.route('/seven', methods = ['GET', 'POST'])
 def QuestionNueva():
-    results = session['results']
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     form  = Question()
     question = 'Does Joe Donermeyer Love you?'
     form.response.choices = prep(["Who is that?", "We don't get along", 'Unclear EOM', "We're good friends", \
@@ -217,7 +235,7 @@ def QuestionNueva():
     if(form.is_submitted()):
         try:
             i = int(form.response.data)
-            rankingKey =  [GFriend.SOWON, GFriend.YERIN, GFriend.UMJI, \
+            rankingKey =  [GFriend.SOWON, GFriend.UMJI, GFriend.YERIN, \
                   GFriend.YUJU, GFriend.SINB, GFriend.EUNHA]    
             givePoints(rankingKey, results, i)
             session['results'] = results 
@@ -232,8 +250,10 @@ def QuestionNueva():
 @app.route('/result', methods = ['GET', 'POST'])
 def final():
     form = Result()
-    results = session['results']
-    #results = [0] * 6
+    try:
+        results = session['results']
+    except:
+        results = [0] * 6
     point = max(results)
     final = []
     for i in range(len(GFriend.gfriend)):
@@ -245,18 +265,18 @@ def final():
     gfriend_uri = GFriend.uri
 
     spotify = spotipy.Spotify()
-    songs = spotify.artist_top_tracks(gfriend_uri)
-    uri_str = ''
-
-    for track in songs['tracks']:
-        uri_str += track['uri'][14:]
-        uri_str += ','
-   
-    if(form.is_submitted()):
-        session['results'] = [0] * 6
-        return redirect('/index')
-    
     img = match + ".gif"
- 
+    uri_str = ''
+    try:
+        songs = spotify.artist_top_tracks(gfriend_uri)
+        for track in songs['tracks']:
+            uri_str += track['uri'][14:]
+            uri_str += ','
+    except:
+        print 'no internet or something gg'
+        print results
+    if(form.is_submitted()):
+            session['results'] = [0] * 6
+            return redirect('/index')
     return render_template('final.html', match = match, img = img,
                        bio = bio, form = form, uris = uri_str)
